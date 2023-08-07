@@ -1,0 +1,61 @@
+### Добавление пользователя
+
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "email": "example@mail.com",
+  "password": "Qwerty123!"
+}
+
+### Добавление второго пользователя
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "email": "simple@mail.com",
+  "password": "simS!212"
+}
+
+### Получение конкретного пользователя по айди
+GET http://localhost:8080/api/users/1
+
+### Обновление пользоватея
+PUT http://localhost:8080/api/users/2
+Content-Type: application/json
+
+{
+  "newRole" : "MANAGER",
+  "newState" : "CONFIRMED"
+}
+
+### Получение всех пользователей
+GET http://localhost:8080/api/users
+
+
+### Добавление задачи пользователю
+POST http://localhost:8080/api/users/1/tasks
+Content-Type: application/json
+
+{
+  "description" : "Заменить картридж в принтере",
+  "title": "картридж",
+  "startDate" : "2023-10-10",
+  "finishDate" : "2023-10-14",
+  "executor": 1
+}
+
+### Добавление второй задачи пользователю
+POST http://localhost:8080/api/users/2/tasks
+Content-Type: application/json
+
+{
+  "description" : "Установить видновс на пк №4",
+  "title": "windows",
+  "startDate" : "2023-10-10",
+  "finishDate" : "2023-11-12",
+  "executor": 1
+}
+
+### Получение всех задач пользователя
+GET http://localhost:8080/api/users/1/tasks
