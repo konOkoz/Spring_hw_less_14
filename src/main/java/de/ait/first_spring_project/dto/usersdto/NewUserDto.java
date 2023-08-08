@@ -2,11 +2,13 @@ package de.ait.first_spring_project.dto.usersdto;
 
 import de.ait.first_spring_project.validation.constraints.NotWeakPassword;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.*;
 
 @Data
+@Builder
 @Schema(description = "Данные для добавления пользователя")
 public class NewUserDto {
 

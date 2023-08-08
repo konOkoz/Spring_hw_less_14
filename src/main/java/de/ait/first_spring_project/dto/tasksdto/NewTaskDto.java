@@ -1,14 +1,21 @@
 package de.ait.first_spring_project.dto.tasksdto;
 
-import de.ait.first_spring_project.validation.constraints.BeforeCurrentDate;
+import de.ait.first_spring_project.validation.constraints.CorrectDateValidator;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Schema(description = "Данные для добавления задания")
+@CorrectDateValidator
 public class NewTaskDto {
 
     @NotNull
@@ -22,15 +29,13 @@ public class NewTaskDto {
     private String title;
 
 
-    @NotNull(message = "Дата начала не может быть пустой")
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Плохой формат даты. Используйте формат YYYY-MM-DD")
-    @BeforeCurrentDate
+    @NotNull
+    @NotBlank
     @Schema(description = "Дата публикации в формате YYYY-MM-DD", example = "2023-10-11")
     private String startDate;
 
-    @NotNull(message = "Дата окончания не может быть пустой")
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Плохой формат даты. Используйте формат YYYY-MM-DD")
-    @BeforeCurrentDate
+    @NotNull
+    @NotBlank
     @Schema(description = "Дата публикации в формате YYYY-MM-DD", example = "2023-10-15")
     private String finishDate;
 

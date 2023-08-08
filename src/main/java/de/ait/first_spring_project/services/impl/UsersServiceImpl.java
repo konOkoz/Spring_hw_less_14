@@ -56,7 +56,11 @@ public class UsersServiceImpl implements UsersService {
         User user = getUserOrThrow(userId);
 
         if (updateUser.getNewRole().equals("ADMIN")) {
-            throw new ForbiddenOperationException("Cannot make an administrator");
+            throw new ForbiddenOperationException("role", "ADMIN");
+        }
+
+        if(updateUser.getNewState().equals("BANNED")){
+            throw new ForbiddenOperationException("state", "BANNED");
         }
 
         user.setState(User.State.valueOf(updateUser.getNewState()));
@@ -78,9 +82,17 @@ public class UsersServiceImpl implements UsersService {
                 .build();
     }
 
+    @Override
+    public UserDto deleteUser(Long userId) {
+        User user = getUserOrThrow(userId);
+
+        usersRepository.delete(user);
+
+        return from(user);
+    }
+
     private User getUserOrThrow(Long userId) {
         return usersRepository.findById(userId).orElseThrow(
-                () -> new NotFoundException("User with id <" + userId + "> not found")
-        );
+                () -> new NotFoundException("User", userId));
     }
 }

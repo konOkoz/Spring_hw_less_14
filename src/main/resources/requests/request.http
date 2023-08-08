@@ -5,7 +5,8 @@ Content-Type: application/json
 
 {
   "email": "example@mail.com",
-  "password": "Qwerty123!"
+  "password": "Qwerty111!"
+
 }
 
 ### Добавление второго пользователя
@@ -40,13 +41,13 @@ Content-Type: application/json
 {
   "description" : "Заменить картридж в принтере",
   "title": "картридж",
-  "startDate" : "2023-10-10",
-  "finishDate" : "2023-10-14",
+  "startDate" : "2023-10-14",
+  "finishDate" : "2023-11-14",
   "executor": 1
 }
 
 ### Добавление второй задачи пользователю
-POST http://localhost:8080/api/users/2/tasks
+POST http://localhost:8080/api/users/1/tasks
 Content-Type: application/json
 
 {

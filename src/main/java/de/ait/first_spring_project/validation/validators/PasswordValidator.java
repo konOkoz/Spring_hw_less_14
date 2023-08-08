@@ -13,7 +13,11 @@ public class PasswordValidator implements ConstraintValidator<NotWeakPassword, S
 
 
     public boolean isValid(String password, ConstraintValidatorContext constraintValidatorContext) {
-      Matcher matcher = pattern.matcher(password);
-      return matcher.matches();
+      try {
+          Matcher matcher = pattern.matcher(password);
+          return matcher.matches();
+      }catch (RuntimeException e) {
+          return false;
+      }
     }
 }

@@ -1,9 +1,11 @@
 package de.ait.first_spring_project.dto.usersdto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 @Schema(description = "Данные для обновления")
 public class UpdateUserDto {
 

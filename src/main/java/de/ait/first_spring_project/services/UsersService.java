@@ -16,4 +16,6 @@ public interface UsersService {
     UserDto updateUser(Long userId, UpdateUserDto updateUser);
 
     TasksDto getAllTasksOfUser(Long userId);
+
+    UserDto deleteUser(Long userId);
 }

@@ -1,5 +1,6 @@
 package de.ait.first_spring_project.controllers.api;
 
+import de.ait.first_spring_project.dto.ErrorDto;
 import de.ait.first_spring_project.dto.tasksdto.NewTaskDto;
 import de.ait.first_spring_project.dto.tasksdto.TaskDto;
 import de.ait.first_spring_project.dto.tasksdto.TasksDto;
@@ -49,7 +50,7 @@ public interface UsersApi {
     @ApiResponses(value ={
             @ApiResponse(responseCode = "404", description = "Пользователь не найден",
             content = {
-                    @Content()
+                    @Content(mediaType = "application.json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "200", description = "Информация о пользователе",
             content = {
@@ -64,13 +65,32 @@ public interface UsersApi {
     @GetMapping
     ResponseEntity<UsersDto> getAllUsers();
 
+    @Operation(summary = "Удаление пользователя", description = "Доступно администратору")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "404", description = "Пользователь не найден",
+                    content = {
+                            @Content(mediaType = "application.json", schema = @Schema(implementation = ErrorDto.class))
+                    }),
+            @ApiResponse(responseCode = "200", description = "Удаленный пользователь",
+                    content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
+                    })
+    })
+    @DeleteMapping("/{user-id}")
+    ResponseEntity<UserDto> deleteUser(@Parameter(required = true, description = "Идентификатор пользователя", example = "2")
+                                       @PathVariable("user-id") Long userId);
+
 
     @Operation(summary = "Обновление пользователя", description = "Доступно администратору")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = "Пользователь не найден",
             content = {
-                    @Content()
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
+            @ApiResponse(responseCode = "403", description = "Нельзя сделать администратором",
+                    content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+                    }),
             @ApiResponse(responseCode = "200", description = "Обновленный пользователь",
             content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
@@ -85,7 +105,7 @@ public interface UsersApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "422", description = "Пользователь с указанным ID не найден в системе",
                     content = {
-                            @Content()
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
                     }),
             @ApiResponse(responseCode = "400", description = "Ошибка валидации",
                     content = {
@@ -106,7 +126,7 @@ public interface UsersApi {
     @ApiResponses(value ={
             @ApiResponse(responseCode = "404", description = "Пользователь не найден",
                     content = {
-                            @Content()
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
                     }),
             @ApiResponse(responseCode = "200", description = "Список задач пользователя",
                     content = {

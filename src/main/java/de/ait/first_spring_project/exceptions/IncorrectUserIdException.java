@@ -5,7 +5,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
 public class IncorrectUserIdException extends RuntimeException{
-    public IncorrectUserIdException(String message){
-        super(message);
+
+    private Long id;
+
+    public IncorrectUserIdException(Long inccorectId ){
+        super();
+        this.id=inccorectId;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

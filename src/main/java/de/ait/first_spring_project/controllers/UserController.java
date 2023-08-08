@@ -44,6 +44,12 @@ public class UserController implements UsersApi {
     }
 
     @Override
+    public ResponseEntity<UserDto> deleteUser(Long userId) {
+        return ResponseEntity
+                .ok(usersService.deleteUser(userId));
+    }
+
+    @Override
     public ResponseEntity<UserDto> updateUser(Long userId, UpdateUserDto updateUser) {
         return ResponseEntity
                 .ok(usersService.updateUser(userId, updateUser));
